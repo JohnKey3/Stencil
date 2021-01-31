@@ -70,6 +70,7 @@
             this.label5.TabIndex = 1;
             this.label5.Text = "*Click*";
             this.label5.Click += new System.EventHandler(this.label5_Click);
+            this.label5.MouseLeave += new System.EventHandler(this.label5_MouseLeave);
             this.label5.MouseHover += new System.EventHandler(this.label5_MouseHover);
             // 
             // label4

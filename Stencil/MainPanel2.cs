@@ -29,5 +29,10 @@ namespace Stencil
         {
             label5.ForeColor = System.Drawing.Color.Red;
         }
+
+        private void label5_MouseLeave(object sender, EventArgs e)
+        {
+            label5.ForeColor = System.Drawing.Color.FromArgb(0, 146, 249);
+        }
     }
 }
