@@ -93,15 +93,28 @@ namespace Stencil
 
 
             conn.Open();
-            
-            SqlCommand command = new SqlCommand("Select Id From Game_Inf where Name='" + Game + "'", conn);
-            var go = command.ExecuteScalar().ToString();
-            int ddd = Convert.ToInt32(go);
-            SqlCommand command21 = new SqlCommand("Select Id from SAler where Name_Saler='" + Saler + "'", conn);
-            var go1 = command21.ExecuteScalar();
-            int ddd1 = Convert.ToInt32(go1);
-            SqlCommand gg = new SqlCommand("INSERT into Order1(Game_Id,Saler_Id) values('" + ddd + "','" + ddd1 + "')", conn);
-            int h = gg.ExecuteNonQuery();
+
+
+
+
+            SqlCommand command = new SqlCommand("Select Id From Game_Inf where Name=@name", conn);
+            command.Parameters.Add("@name", SqlDbType.Char,100).Value = Game;
+            command.Prepare();
+            int go =(Int32) command.ExecuteScalar();
+
+            SqlCommand command21 = new SqlCommand("Select Id from SAler where Name_Saler=@Saler", conn);
+            command21.Parameters.Add("@Saler", SqlDbType.Char,100).Value=Saler;
+            command21.Prepare();
+            var go1 =(Int32) command21.ExecuteScalar();
+
+            SqlCommand gg = new SqlCommand("INSERT into Order1(Game_Id,Saler_Id) values(@gmid,@sid)", conn);
+            gg.Parameters.Add("@gmid", SqlDbType.Char, 100).Value = go;
+            gg.Parameters.Add("@sid", SqlDbType.Char, 100).Value = go1;
+            gg.ExecuteNonQuery();
+
+
+
+
             dataGridView2.Rows.Clear();
             string query1 = "SELECT * FROM Order1 ";
             SqlCommand command1 = new SqlCommand(query1, conn);
@@ -122,10 +135,16 @@ namespace Stencil
 
 
             //procedure
+
+          
+
             SqlCommand jh = new SqlCommand("Count1", conn);
             jh.CommandType = CommandType.StoredProcedure;
-            string str = Convert.ToString(jh.ExecuteScalar());
+            string str = Convert.ToString(jh.ExecuteScalar());  //tut procedure
             label3.Text = "Всего строк= " + str;
+
+
+
 
             //
             conn.Close();
@@ -135,12 +154,7 @@ namespace Stencil
 
         private void button3_Click(object sender, EventArgs e)
         {
-            conn.Open();
-            int idOrder = Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[0].Value);
-            SqlCommand cmd2 = new SqlCommand("Delete from Order1 where Order_Id='" + idOrder + "'", conn);
-            dataGridView2.Rows.RemoveAt(this.dataGridView2.SelectedRows[0].Index);
-            cmd2.ExecuteNonQuery();
-            conn.Close();
+
         }
 
         private void Itog_Load(object sender, EventArgs e)
@@ -184,19 +198,42 @@ namespace Stencil
             reader1.Close();
 
             //procedure
+
             SqlCommand jh = new SqlCommand("Count1", conn);
             jh.CommandType = CommandType.StoredProcedure;
-            string str = Convert.ToString(jh.ExecuteScalar());
-            label3.Text="Всего строк= "+str;
-           
-            //
-
-
+            string str = Convert.ToString(jh.ExecuteScalar());  //tut procedure
+            label3.Text = "Всего строк= " + str;
 
 
             conn.Close();
             foreach (string[] s in data1)
                 dataGridView2.Rows.Add(s);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in this.dataGridView2.SelectedRows)
+            {
+                conn.Open();
+                int idOrder = Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[0].Value);
+                SqlCommand cmd2 = new SqlCommand("Delete from Order1 where Order_Id=@idord", conn);
+                cmd2.Parameters.Add("@idord", SqlDbType.Int, 100).Value = idOrder;
+                cmd2.Prepare();
+                cmd2.ExecuteNonQuery();
+
+
+                //proc
+
+                SqlCommand jh = new SqlCommand("Count1", conn);
+                jh.CommandType = CommandType.StoredProcedure;
+                string str = Convert.ToString(jh.ExecuteScalar());  //tut procedure
+                label3.Text = "Всего строк= " + str;
+                //
+
+
+                conn.Close();
+                dataGridView2.Rows.RemoveAt(this.dataGridView2.SelectedRows[0].Index);
+            }
         }
     }
 }

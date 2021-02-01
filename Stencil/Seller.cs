@@ -28,15 +28,17 @@ namespace Stencil
             }
             else { 
             conn.Open();
+
             SqlCommand cmd = new SqlCommand("INSERT into Saler(Name_Saler,Mail) values (@name,@mail)", conn);
             SqlParameter idParam = new SqlParameter("@name", SqlDbType.Text, 100);
-            SqlParameter descParam = new SqlParameter("@mail", SqlDbType.Text, 100);
+            SqlParameter descParam = new SqlParameter("@mail", SqlDbType.Char, 100);
             idParam.Value = textBox5.Text;
             descParam.Value = textBox6.Text;
             cmd.Parameters.Add(idParam);
             cmd.Parameters.Add(descParam);
             cmd.Prepare();
-            int h = cmd.ExecuteNonQuery();
+            cmd.ExecuteNonQuery();
+
             dataGridView3.Rows.Clear();
             string query2 = "SELECT * FROM SAler ";
             SqlCommand command2 = new SqlCommand(query2, conn);
@@ -69,10 +71,28 @@ namespace Stencil
             catch
             {
             }
-            
-            SqlCommand cmd46 = new SqlCommand("UPDATE Saler SET Name_Saler='" + textBox5.Text + "',Mail='" + textBox6.Text + "' where Id='" + idSaler + "'", conn);
-            cmd46.ExecuteNonQuery();
+
+
+       //ready for use
+            SqlCommand cmd = new SqlCommand("UPDATE Saler SET Name_Saler=@name,Mail=@mail where Id=@idi", conn);
+            SqlParameter idParam = new SqlParameter("@name", SqlDbType.Char, 100);
+            SqlParameter descParam = new SqlParameter("@mail", SqlDbType.Char, 100);
+            cmd.Parameters.Add("@idi", SqlDbType.Int).Value = idSaler;     //  idid.Value = idSaler;
+            idParam.Value = textBox5.Text;
+            descParam.Value = textBox6.Text;
+            cmd.Parameters.Add(idParam);
+            cmd.Parameters.Add(descParam);
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+            ///
+
+
+
+
             dataGridView3.Rows.Clear();
+
+
+
             string query2 = "SELECT * FROM SAler ";
             SqlCommand command2 = new SqlCommand(query2, conn);
             SqlDataReader reader2 = command2.ExecuteReader();
@@ -96,12 +116,37 @@ namespace Stencil
             foreach (DataGridViewRow item in this.dataGridView3.SelectedRows)
             {
                 conn.Open();
-                int idSaler = Convert.ToInt32(dataGridView3.SelectedRows[0].Cells[0].Value);
-                SqlCommand cmd5 = new SqlCommand("Delete from Saler where Id='" + idSaler + "'", conn);
-                SqlCommand cmd6 = new SqlCommand("Delete from Order1 where Saler_Id = '" + idSaler + "'", conn);
-                dataGridView3.Rows.RemoveAt(this.dataGridView3.SelectedRows[0].Index);
-                cmd6.ExecuteNonQuery();
+ int idSaler = Convert.ToInt32(dataGridView3.SelectedRows[0].Cells[0].Value);
+
+
+             
+
+              // SqlCommand cmd = new SqlCommand("UPDATE Saler SET Name_Saler=@name,Mail=@mail where Id=@idi", conn);
+           // .    SqlParameter idParam = new SqlParameter("@name", SqlDbType.Char, 100);
+            //    SqlParameter descParam = new SqlParameter("@mail", SqlDbType.Char, 100);
+
+                SqlCommand cmd5 = new SqlCommand("Delete from Saler where Id=@idSaler", conn);
+                SqlCommand cmd6 = new SqlCommand("Delete from Order1 where Saler_Id = @idSaler", conn);
+
+
+                cmd5.Parameters.Add("@idSaler", SqlDbType.Int).Value = idSaler;     //  это присваивание сразу и add пармаметр то есть вместо   idParam.Value = textBox5.Text; и   cmd.Parameters.Add(idParam);
+                cmd6.Parameters.Add("@idSaler", SqlDbType.Int).Value = idSaler;
+                cmd5.Prepare();
                 cmd5.ExecuteNonQuery();
+                cmd6.Prepare();
+                cmd6.ExecuteNonQuery();
+
+
+
+                //RABOTAET
+
+
+
+             //   SqlCommand cmd5 = new SqlCommand("Delete from Saler where Id='" + idSaler + "'", conn);
+              //  SqlCommand cmd6 = new SqlCommand("Delete from Order1 where Saler_Id = '" + idSaler + "'", conn);
+                dataGridView3.Rows.RemoveAt(this.dataGridView3.SelectedRows[0].Index);
+              //  cmd6.ExecuteNonQuery();
+              //  cmd5.ExecuteNonQuery();
                 conn.Close();
             }
         }
@@ -150,9 +195,9 @@ namespace Stencil
 
 
             //procedure
-            SqlCommand jh = new SqlCommand(zapros, conn);  //делаем установку с командой и путем
-            string str = Convert.ToString(jh.ExecuteScalar());//извлекаем результат
-            MessageBox.Show(str);//выводми
+        //    SqlCommand jh = new SqlCommand(zapros, conn);  //делаем установку с командой и путем
+       //     string str = Convert.ToString(jh.ExecuteScalar());//извлекаем результат
+       //     MessageBox.Show(str);//выводми
 
             //
 

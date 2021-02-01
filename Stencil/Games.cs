@@ -23,7 +23,7 @@ namespace Stencil
 
         private void Games_Load(object sender, EventArgs e)
         {
-            dataGridView1.EnableHeadersVisualStyles = false; //Чтоб цвета применялись
+            dataGridView1.EnableHeadersVisualStyles = false; //Чтоб цвета применялись Какой-то рудмиент от Экспишки, эх вот раньше были игры на экспишки D:
 
             dataGridView1.Rows.Clear();
             conn.Open();
@@ -50,18 +50,40 @@ namespace Stencil
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "")
+            if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" )
             {
 
             }
             else
             {
+                if ( textBox4.Text == "")
+                {
+                    textBox4.Text = "0";
+                }
                 conn.Open();
-
                 dataGridView1.Rows.Clear();
-                SqlCommand cmd = new SqlCommand("INSERT into Game_Inf(Name,Descr,Price,Sale) values('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "') ", conn);
+                SqlCommand cmd5 = new SqlCommand("INSERT into Game_Inf(Name,Descr,Price,Sale) values(@Name,@Descr,@Price,@Sale)", conn);
+                SqlParameter sd1 = new SqlParameter("@Name", SqlDbType.Char, 100);
+                    sd1.Value = textBox1.Text;
+                cmd5.Parameters.Add(sd1);
+                SqlParameter sd2 = new SqlParameter("@Descr", SqlDbType.Text, 100);
+                sd2.Value = textBox2.Text;
+                cmd5.Parameters.Add(sd2);
+                SqlParameter sd3 = new SqlParameter("@Price", SqlDbType.Int);
+                sd3.Value = textBox3.Text;
+                cmd5.Parameters.Add(sd3);
+                SqlParameter sd4 = new SqlParameter("@Sale", SqlDbType.Int, 100);
+                sd4.Value = textBox4.Text;
+                cmd5.Parameters.Add(sd4);
+                cmd5.Prepare();
+                cmd5.ExecuteNonQuery();
+                //   SqlCommand cmd = new SqlCommand("INSERT into Game_Inf(Name,Descr,Price,Sale) values('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "') ", conn);
 
-                cmd.ExecuteNonQuery();
+                //  cmd.ExecuteNonQuery();
+
+
+
+
                 string query = "SELECT * FROM Game_Inf ";
                 SqlCommand command = new SqlCommand(query, conn);
                 SqlDataReader reader = command.ExecuteReader();
@@ -117,8 +139,26 @@ namespace Stencil
             {
                 conn.Open();
                 int idgame = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
-                SqlCommand cmd43 = new SqlCommand("UPDATE Game_Inf SET Name='" + textBox1.Text + "',Descr='" + textBox2.Text + "',Price='" + textBox3.Text + "',Sale='" + textBox4.Text + "' where Id='" + idgame + "'", conn);
-                cmd43.ExecuteNonQuery();
+
+
+                SqlCommand cmd51 = new SqlCommand("UPDATE Game_Inf SET Name=@NAme,Descr=@Descr,Price=@Price,Sale=@Sale where Id=@IdGame", conn);
+                cmd51.Parameters.Add("@IdGame", SqlDbType.Int).Value = idgame;
+                SqlParameter sd11 = new SqlParameter("@Name", SqlDbType.Char, 100);
+                sd11.Value = textBox1.Text;
+                cmd51.Parameters.Add(sd11);
+                SqlParameter sd21 = new SqlParameter("@Descr", SqlDbType.Text, 100);
+                sd21.Value = textBox2.Text;
+                cmd51.Parameters.Add(sd21);
+                SqlParameter sd31 = new SqlParameter("@Price", SqlDbType.Int);
+                sd31.Value = textBox3.Text;
+                cmd51.Parameters.Add(sd31);
+                SqlParameter sd41 = new SqlParameter("@Sale", SqlDbType.Int, 100);
+                sd41.Value = textBox4.Text;
+                cmd51.Parameters.Add(sd41);
+                cmd51.Prepare();
+                cmd51.ExecuteNonQuery();
+
+
 
                 dataGridView1.Rows.Clear();
                 string query = "SELECT * FROM Game_Inf ";
@@ -150,12 +190,29 @@ namespace Stencil
             foreach (DataGridViewRow item in this.dataGridView1.SelectedRows)
             {
                 conn.Open();
-              int  id3 = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
-                SqlCommand cmd = new SqlCommand("Delete from Game_Inf where Id='" + id3 + "'", conn);
-                SqlCommand cmd1 = new SqlCommand("Delete from Order1 where Game_Id = '" + id3 + "'", conn);
-                dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
+  int  id3 = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
+
+
+
+                //Два случая использования параметра, через присваивание и через передачу параметра
+
+                SqlCommand cmd = new SqlCommand("Delete from Game_Inf where Id=@Game", conn);
+                SqlCommand cmd1 = new SqlCommand("Delete from Order1 where Game_Id =@Game1", conn);
+
+          
+                cmd1.Parameters.Add("@Game1", SqlDbType.Int).Value = id3;
+
+                SqlParameter sd41 = new SqlParameter("@Game", SqlDbType.Int, 100);
+                sd41.Value = id3;
+                cmd.Parameters.Add(sd41);
+
+                cmd.Prepare();
                 cmd.ExecuteNonQuery();
+                cmd1.Prepare();
                 cmd1.ExecuteNonQuery();
+
+
+                dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
                 conn.Close();
             }
 
