@@ -38,8 +38,8 @@ namespace Stencil
             cmd.Parameters.Add(descParam);
             cmd.Prepare();
             cmd.ExecuteNonQuery();
-
             dataGridView3.Rows.Clear();
+            
             string query2 = "SELECT * FROM SAler ";
             SqlCommand command2 = new SqlCommand(query2, conn);
             SqlDataReader reader2 = command2.ExecuteReader();

@@ -16,10 +16,10 @@ using Microsoft.SqlServer.Server;
 namespace Stencil
 {
 
-
+   
     public partial class Form1 : Form
     {
-
+        SqlConnection conn = new SqlConnection("Data Source=DESKTOP-1B8H9A7\\JIJA;Initial Catalog=8Practos;Integrated Security=True");
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 
@@ -60,8 +60,38 @@ namespace Stencil
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            conn.Open();
             string das = Login.Value1;
             label3.Text = "User: " + das;
+
+            SqlCommand cmd = new SqlCommand("Select status from users where username=@name", conn);
+            SqlParameter sd41 = new SqlParameter("@name", SqlDbType.Char, 100);
+            sd41.Value = das;
+            cmd.Parameters.Add(sd41);
+            cmd.Prepare();
+            string status = Convert.ToString(cmd.ExecuteScalar());
+            label1.Text = "Status: " + status;
+            switch (status)
+            {
+                case "Nobody":
+                    btnGAmes.Visible = false;
+                    btnSaller.Visible = false;
+                    btnItog.Visible = false;
+                    break;
+                    
+                case "Mmerch":
+                    btnSaller.Enabled = false;
+                    btnSaller.Text = "Недоступно";
+                    break;
+
+                default:
+                    
+
+                    break;
+            }
+            conn.Close();
+
+           
         }
 
         private void btnPanel_Click(object sender, EventArgs e)

@@ -36,10 +36,19 @@ namespace Stencil
             else
             {
                 conn.Open();
-                string query2 = "Select * From Users WHERE username ='"+textBox1.Text+"' and password='"+textBox2.Text+"'";
+                string query2 = "Select * From Users WHERE username =@username and password=@pass";
+                  SqlCommand command2 = new SqlCommand(query2, conn);
+                SqlParameter sd41 = new SqlParameter("@username", SqlDbType.Char, 100);
+                sd41.Value = textBox1.Text;
+                command2.Parameters.Add(sd41);
+                SqlParameter sd415 = new SqlParameter("@pass", SqlDbType.Char, 100);
+                sd415.Value = textBox2.Text;
+                command2.Parameters.Add(sd415);
+                command2.Prepare();
+
+
 
                
-                SqlCommand command2 = new SqlCommand(query2, conn);
                 SqlDataReader reader2 = command2.ExecuteReader();
 
                 if (reader2.Read() == true)

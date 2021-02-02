@@ -42,10 +42,30 @@ namespace Stencil
                 data[data.Count - 1][5] = reader[5].ToString();
             }
             reader.Close();
-            conn.Close();
+            
             foreach (string[] s in data)
                 dataGridView1.Rows.Add(s);
 
+
+            string das = Login.Value1;
+            SqlCommand cmd = new SqlCommand("Select status from users where username=@name", conn);
+            SqlParameter sd41 = new SqlParameter("@name", SqlDbType.Char, 100);
+            sd41.Value = das;
+            cmd.Parameters.Add(sd41);
+            cmd.Prepare();
+            string status = Convert.ToString(cmd.ExecuteScalar());
+            switch (status)
+            {
+                case "Mmerch":
+
+                    panel2.Visible = false;
+                    break;
+
+                default:
+                    break;
+
+            }
+conn.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -42,6 +42,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.PanelFormLoader = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -157,6 +158,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.PnlNav);
             this.panel2.Controls.Add(this.pictureBox1);
@@ -216,6 +218,17 @@
             this.PanelFormLoader.TabIndex = 2;
             this.PanelFormLoader.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelFormLoader_Paint);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(219)))));
+            this.label1.Location = new System.Drawing.Point(3, 128);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 21);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Statis";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -257,6 +270,7 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Panel PanelFormLoader;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
     }
 }
 
