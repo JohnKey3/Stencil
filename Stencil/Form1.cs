@@ -181,7 +181,7 @@ namespace Stencil
             PanelNavigatiom.Height = btnExit.Height;
             PanelNavigatiom.Top = btnExit.Top;
             btnExit.BackColor = Color.FromArgb(46, 51, 73);
-            this.Close();
+            System.Windows.Forms.Application.ExitThread();
         }
 
         private void btnPanel_Leave(object sender, EventArgs e)
