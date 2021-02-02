@@ -34,5 +34,10 @@ namespace Stencil
             }
 
         }
+
+        private void splashscreen_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

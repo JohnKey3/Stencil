@@ -181,7 +181,7 @@ namespace Stencil
 
 
             dataGridView3.EnableHeadersVisualStyles = false;
-
+            
             conn.Open();
 
             //Proverka polzovatelya

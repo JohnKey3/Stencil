@@ -220,7 +220,7 @@ namespace Stencil
                 cmd2.Parameters.Add("@idord", SqlDbType.Int, 100).Value = idOrder;
                 cmd2.Prepare();
                 cmd2.ExecuteNonQuery();
-
+                
 
                 //proc
 

@@ -37,12 +37,12 @@
             this.btnGAmes = new System.Windows.Forms.Button();
             this.btnPanel = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.PnlNav = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.PanelFormLoader = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -167,6 +167,18 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(186, 162);
             this.panel2.TabIndex = 1;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(219)))));
+            this.label1.Location = new System.Drawing.Point(3, 128);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 21);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Statis";
             // 
             // label3
             // 
@@ -217,17 +229,6 @@
             this.PanelFormLoader.Size = new System.Drawing.Size(765, 477);
             this.PanelFormLoader.TabIndex = 2;
             this.PanelFormLoader.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelFormLoader_Paint);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(219)))));
-            this.label1.Location = new System.Drawing.Point(3, 128);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 21);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Statis";
             // 
             // Form1
             // 
