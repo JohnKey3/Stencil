@@ -21,6 +21,11 @@ namespace Stencil
             InitializeComponent();
         }
 
+        private void notify1(String message)
+        {
+            notify1 dialog = new notify1(message);
+            dialog.Show();
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             dataGridView2.Rows.Clear();
@@ -62,6 +67,7 @@ namespace Stencil
            
            
                 conn.Close();
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -150,6 +156,8 @@ namespace Stencil
             conn.Close();
             foreach (string[] s in data1)
                 dataGridView2.Rows.Add(s);
+
+            notify1("Успешно добавлено");
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -233,6 +241,7 @@ namespace Stencil
 
                 conn.Close();
                 dataGridView2.Rows.RemoveAt(this.dataGridView2.SelectedRows[0].Index);
+                notify1("Успешно удалено");
             }
         }
     }

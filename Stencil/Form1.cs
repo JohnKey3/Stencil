@@ -34,6 +34,7 @@ namespace Stencil
 
           );
         Login log;
+        
         public Form1()
         {
 
@@ -56,10 +57,17 @@ namespace Stencil
             Glavnayapanel.Show();
         }
 
-       
+        public static int WinHeight = 0;
+        public static int WinWeight = 0;
 
+       
         private void Form1_Load(object sender, EventArgs e)
         {
+            int height = this.Top;
+            int weight = this.Left;
+            WinHeight = height;
+            WinWeight = weight;
+
             conn.Open();
             string das = Login.Value1;
             label3.Text = "User: " + das;
@@ -135,10 +143,16 @@ namespace Stencil
             btnItog.BackColor = Color.FromArgb(24, 30, 54);
             btnSaller.BackColor = Color.FromArgb(24, 30, 54);
 
+            int height = this.Top;
+            int weight = this.Left;
+            WinHeight = height;
+            WinWeight = weight;
+
         }
 
         private void btnSaller_Click(object sender, EventArgs e)
         {
+
             PanelNavigatiom.Height = btnSaller.Height;
             PanelNavigatiom.Top = btnSaller.Top;
             lblTitle.Text = "Таблица продавцов";
@@ -154,6 +168,7 @@ namespace Stencil
             btnGAmes.BackColor = Color.FromArgb(24, 30, 54);
             btnItog.BackColor = Color.FromArgb(24, 30, 54);
             btnSaller.BackColor = Color.FromArgb(46, 51, 73);
+
 
         }
 
@@ -248,6 +263,19 @@ namespace Stencil
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            int height = this.Top;
+            int weight = this.Left;
+            WinHeight = height;
+            WinWeight = weight;
         }
     }
 }

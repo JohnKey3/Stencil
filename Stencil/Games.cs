@@ -20,7 +20,11 @@ namespace Stencil
         {
             InitializeComponent();
         }
-
+        private void notify1(String message)
+        {
+            notify1 dialog = new notify1(message);
+            dialog.Show();
+        }
         private void Games_Load(object sender, EventArgs e)
         {
             dataGridView1.EnableHeadersVisualStyles = false; //Чтоб цвета применялись Какой-то рудмиент от Экспишки, эх вот раньше были игры на экспишки D:
@@ -65,7 +69,9 @@ namespace Stencil
                     break;
 
             }
+            notify1("Успешно добавлено");
 conn.Close();
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -123,10 +129,11 @@ conn.Close();
                 conn.Close();
                 foreach (string[] s in data)
                     dataGridView1.Rows.Add(s);
+notify1("Успешно добавлено");
             }
+
             
-            
-           
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -199,7 +206,7 @@ conn.Close();
                 conn.Close();
                 foreach (string[] s in datan)
                     dataGridView1.Rows.Add(s);
-
+                notify1("Успешно обнавлено");
             }
         }
 
@@ -234,9 +241,10 @@ conn.Close();
 
                 dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
                 conn.Close();
+                notify1("Успешно удалено");
             }
 
-
+         
 
         }
 

@@ -58,58 +58,79 @@ namespace Stencil
             foreach (string[] s in data2)
                 dataGridView3.Rows.Add(s);
 
+
+
+notify1("Успешно добавлено");
             }
+            
+           
+        }
+
+        private void notify1(String message)
+        {
+            notify1 dialog = new notify1(message);
+            dialog.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            conn.Open();
-            int idSaler = 0;
-            try { 
-             idSaler = Convert.ToInt32(dataGridView3.SelectedRows[0].Cells[0].Value);
-            }
-            catch
+            if (textBox5.Text == "" || textBox6.Text == "")
             {
+
             }
-
-
-       //ready for use
-            SqlCommand cmd = new SqlCommand("UPDATE Saler SET Name_Saler=@name,Mail=@mail where Id=@idi", conn);
-            SqlParameter idParam = new SqlParameter("@name", SqlDbType.Char, 100);
-            SqlParameter descParam = new SqlParameter("@mail", SqlDbType.Char, 100);
-            cmd.Parameters.Add("@idi", SqlDbType.Int).Value = idSaler;     //  idid.Value = idSaler;
-            idParam.Value = textBox5.Text;
-            descParam.Value = textBox6.Text;
-            cmd.Parameters.Add(idParam);
-            cmd.Parameters.Add(descParam);
-            cmd.Prepare();
-            cmd.ExecuteNonQuery();
-            ///
-
-
-
-
-            dataGridView3.Rows.Clear();
-
-
-
-            string query2 = "SELECT * FROM SAler ";
-            SqlCommand command2 = new SqlCommand(query2, conn);
-            SqlDataReader reader2 = command2.ExecuteReader();
-            List<string[]> data2 = new List<string[]>();
-            while (reader2.Read())
+            else
             {
-                data2.Add(new string[3]);
-                data2[data2.Count - 1][0] = reader2[0].ToString();
-                data2[data2.Count - 1][1] = reader2[1].ToString();
-                data2[data2.Count - 1][2] = reader2[2].ToString();
+                conn.Open();
+                int idSaler = 0;
+                try
+                {
+                    idSaler = Convert.ToInt32(dataGridView3.SelectedRows[0].Cells[0].Value);
+                }
+                catch
+                {
+                }
 
+
+                //ready for use
+                SqlCommand cmd = new SqlCommand("UPDATE Saler SET Name_Saler=@name,Mail=@mail where Id=@idi", conn);
+                SqlParameter idParam = new SqlParameter("@name", SqlDbType.Char, 100);
+                SqlParameter descParam = new SqlParameter("@mail", SqlDbType.Char, 100);
+                cmd.Parameters.Add("@idi", SqlDbType.Int).Value = idSaler;     //  idid.Value = idSaler;
+                idParam.Value = textBox5.Text;
+                descParam.Value = textBox6.Text;
+                cmd.Parameters.Add(idParam);
+                cmd.Parameters.Add(descParam);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+                notify1("Успешно обновлено");
+
+
+
+
+                dataGridView3.Rows.Clear();
+
+
+
+                string query2 = "SELECT * FROM SAler ";
+                SqlCommand command2 = new SqlCommand(query2, conn);
+                SqlDataReader reader2 = command2.ExecuteReader();
+                List<string[]> data2 = new List<string[]>();
+                while (reader2.Read())
+                {
+                    data2.Add(new string[3]);
+                    data2[data2.Count - 1][0] = reader2[0].ToString();
+                    data2[data2.Count - 1][1] = reader2[1].ToString();
+                    data2[data2.Count - 1][2] = reader2[2].ToString();
+
+                }
+                reader2.Close();
+                conn.Close();
+                foreach (string[] s in data2)
+                    dataGridView3.Rows.Add(s);
             }
-            reader2.Close();
-            conn.Close();
-            foreach (string[] s in data2)
-                dataGridView3.Rows.Add(s);
         }
+     
+
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -145,6 +166,9 @@ namespace Stencil
               //  cmd6.ExecuteNonQuery();
               //  cmd5.ExecuteNonQuery();
                 conn.Close();
+
+                notify1("Успешно удалено");
+
             }
         }
 
