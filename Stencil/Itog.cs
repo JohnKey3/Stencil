@@ -244,7 +244,5 @@ namespace Stencil
                 notify1("Успешно удалено");
             }
         }
-
-
     }
 }
