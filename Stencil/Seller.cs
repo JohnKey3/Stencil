@@ -258,5 +258,71 @@ notify1("Успешно добавлено");
             {
             }
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            conn.Open();
+            dataGridView3.Rows.Clear();
+            string query2 = "SELECT * FROM SAler where Name_saler like '"+textBox1.Text+"%'";
+            SqlCommand command2 = new SqlCommand(query2, conn);
+            SqlDataReader reader2 = command2.ExecuteReader();
+            List<string[]> data2 = new List<string[]>();
+            while (reader2.Read())
+            {
+                data2.Add(new string[3]);
+                data2[data2.Count - 1][0] = reader2[0].ToString();
+                data2[data2.Count - 1][1] = reader2[1].ToString();
+                data2[data2.Count - 1][2] = reader2[2].ToString();
+
+            }
+            reader2.Close();
+            conn.Close();
+            foreach (string[] s in data2)
+                dataGridView3.Rows.Add(s);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            conn.Open();
+            dataGridView3.Rows.Clear();
+            string query2 = "SELECT * FROM SAler order by Name_saler";
+            SqlCommand command2 = new SqlCommand(query2, conn);
+            SqlDataReader reader2 = command2.ExecuteReader();
+            List<string[]> data2 = new List<string[]>();
+            while (reader2.Read())
+            {
+                data2.Add(new string[3]);
+                data2[data2.Count - 1][0] = reader2[0].ToString();
+                data2[data2.Count - 1][1] = reader2[1].ToString();
+                data2[data2.Count - 1][2] = reader2[2].ToString();
+
+            }
+            reader2.Close();
+            conn.Close();
+            foreach (string[] s in data2)
+                dataGridView3.Rows.Add(s);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            conn.Open();
+            dataGridView3.Rows.Clear();
+            string query2 = "SELECT * FROM SAler Order by Id";
+            SqlCommand command2 = new SqlCommand(query2, conn);
+            SqlDataReader reader2 = command2.ExecuteReader();
+            List<string[]> data2 = new List<string[]>();
+            while (reader2.Read())
+            {
+                data2.Add(new string[3]);
+                data2[data2.Count - 1][0] = reader2[0].ToString();
+                data2[data2.Count - 1][1] = reader2[1].ToString();
+                data2[data2.Count - 1][2] = reader2[2].ToString();
+
+            }
+            reader2.Close();
+            conn.Close();
+            foreach (string[] s in data2)
+                dataGridView3.Rows.Add(s);
+        }
     }
 }
