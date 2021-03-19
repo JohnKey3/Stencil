@@ -420,7 +420,7 @@ namespace Stencil
             foreach (string[] s in data)
                 dataGridView1.Rows.Add(s);
         }
-
+        //work
         private void comboBox2_TextChanged(object sender, EventArgs e)
         {
 
