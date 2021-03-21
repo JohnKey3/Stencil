@@ -54,10 +54,11 @@ namespace Stencil
             List<string[]> data1 = new List<string[]>();
             while (reader1.Read())
             {
-                data1.Add(new string[3]);
+                data1.Add(new string[4]);
                 data1[data1.Count - 1][0] = reader1[0].ToString();
                 data1[data1.Count - 1][1] = reader1[1].ToString();
                 data1[data1.Count - 1][2] = reader1[2].ToString();
+                data1[data1.Count - 1][3] = reader1[3].ToString();
             }
             reader1.Close();
             foreach (string[] s in data1)
@@ -113,11 +114,18 @@ namespace Stencil
             command21.Prepare();
             var go1 =(Int32) command21.ExecuteScalar();
 
-            SqlCommand gg = new SqlCommand("INSERT into Order1(Game_Id,Saler_Id) values(@gmid,@sid)", conn);
+            SqlCommand command44 = new SqlCommand("Select Total_Price From Game_Inf where Name=@name1", conn);
+            command44.Parameters.Add("@name1", SqlDbType.Char, 100).Value = Game;
+            command44.Prepare();
+            int Summa1 = (Int32)command44.ExecuteScalar();
+
+            SqlCommand gg = new SqlCommand("INSERT into Order1(Game_Id,Saler_Id,Summa) values(@gmid,@sid,@sum)", conn);
             gg.Parameters.Add("@gmid", SqlDbType.Char, 100).Value = go;
             gg.Parameters.Add("@sid", SqlDbType.Char, 100).Value = go1;
+            gg.Parameters.Add("@sum", SqlDbType.Char, 100).Value = Summa1;
             gg.ExecuteNonQuery();
 
+           
 
 
 
@@ -128,10 +136,11 @@ namespace Stencil
             List<string[]> data1 = new List<string[]>();
             while (reader1.Read())
             {
-                data1.Add(new string[3]);
+                data1.Add(new string[4]);
                 data1[data1.Count - 1][0] = reader1[0].ToString();
                 data1[data1.Count - 1][1] = reader1[1].ToString();
                 data1[data1.Count - 1][2] = reader1[2].ToString();
+                data1[data1.Count - 1][3] = reader1[3].ToString();
             }
 
 
@@ -198,10 +207,11 @@ namespace Stencil
             List<string[]> data1 = new List<string[]>();
             while (reader1.Read())
             {
-                data1.Add(new string[3]);
+                data1.Add(new string[4]);
                 data1[data1.Count - 1][0] = reader1[0].ToString();
                 data1[data1.Count - 1][1] = reader1[1].ToString();
                 data1[data1.Count - 1][2] = reader1[2].ToString();
+                data1[data1.Count - 1][3] = reader1[3].ToString();
             }
             reader1.Close();
 
@@ -245,6 +255,13 @@ namespace Stencil
             }
         }
 
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+        }
     }
 }

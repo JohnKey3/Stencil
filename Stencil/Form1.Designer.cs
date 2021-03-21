@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.PanelNavigatiom = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnItog = new System.Windows.Forms.Button();
@@ -51,6 +53,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.PanelNavigatiom);
             this.panel1.Controls.Add(this.btnExit);
             this.panel1.Controls.Add(this.btnItog);
@@ -64,13 +68,38 @@
             this.panel1.Size = new System.Drawing.Size(186, 577);
             this.panel1.TabIndex = 0;
             // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.panel3.Location = new System.Drawing.Point(-55, 330);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(65, 42);
+            this.panel3.TabIndex = 6;
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.button1.Location = new System.Drawing.Point(0, 330);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(186, 42);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "График";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Leave += new System.EventHandler(this.button1_Leave);
+            // 
             // PanelNavigatiom
             // 
             this.PanelNavigatiom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.PanelNavigatiom.Location = new System.Drawing.Point(3, 193);
+            this.PanelNavigatiom.Location = new System.Drawing.Point(0, 168);
             this.PanelNavigatiom.Name = "PanelNavigatiom";
-            this.PanelNavigatiom.Size = new System.Drawing.Size(3, 100);
-            this.PanelNavigatiom.TabIndex = 3;
+            this.PanelNavigatiom.Size = new System.Drawing.Size(10, 165);
+            this.PanelNavigatiom.TabIndex = 5;
             // 
             // btnExit
             // 
@@ -167,7 +196,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(186, 162);
             this.panel2.TabIndex = 1;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // label1
             // 
@@ -228,7 +256,6 @@
             this.PanelFormLoader.Name = "PanelFormLoader";
             this.PanelFormLoader.Size = new System.Drawing.Size(765, 477);
             this.PanelFormLoader.TabIndex = 2;
-            this.PanelFormLoader.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelFormLoader_Paint);
             // 
             // Form1
             // 
@@ -245,7 +272,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ItsJustWorks";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
@@ -274,6 +300,8 @@
         private System.Windows.Forms.Panel PanelFormLoader;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel3;
     }
 }
 

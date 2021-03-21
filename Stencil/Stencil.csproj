@@ -91,6 +91,12 @@
     <Compile Include="Seller.Designer.cs">
       <DependentUpon>Seller.cs</DependentUpon>
     </Compile>
+    <Compile Include="SellerChart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SellerChart.Designer.cs">
+      <DependentUpon>SellerChart.cs</DependentUpon>
+    </Compile>
     <Compile Include="splashscreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +132,9 @@
     </Compile>
     <EmbeddedResource Include="Seller.resx">
       <DependentUpon>Seller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SellerChart.resx">
+      <DependentUpon>SellerChart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="splashscreen.resx">
       <DependentUpon>splashscreen.cs</DependentUpon>

@@ -37,8 +37,7 @@ namespace Stencil
         
         public Form1()
         {
-
-           
+            
             
 
             InitializeComponent();
@@ -63,6 +62,7 @@ namespace Stencil
        
         private void Form1_Load(object sender, EventArgs e)
         {
+            panel3.Hide();
             int height = this.Top;
             int weight = this.Left;
             WinHeight = height;
@@ -85,11 +85,14 @@ namespace Stencil
                     btnGAmes.Visible = false;
                     btnSaller.Visible = false;
                     btnItog.Visible = false;
+                    button1.Visible = false;
+
                     break;
                     
                 case "Mmerch":
                     btnSaller.Enabled = false;
                     btnSaller.Text = "Недоступно";
+                    button1.Visible = false;
                     break;
 
                 default:
@@ -124,6 +127,10 @@ namespace Stencil
             btnGAmes.BackColor = Color.FromArgb(24, 30, 54);
             btnItog.BackColor = Color.FromArgb(24, 30, 54);
             btnSaller.BackColor = Color.FromArgb(24, 30, 54);
+
+            button1.BackColor = Color.FromArgb(24, 30, 54);
+            PanelNavigatiom.Show();
+            panel3.Hide();
         }
 
         private void btnGAmes_Click(object sender, EventArgs e)
@@ -143,11 +150,14 @@ namespace Stencil
             btnItog.BackColor = Color.FromArgb(24, 30, 54);
             btnSaller.BackColor = Color.FromArgb(24, 30, 54);
 
+            button1.BackColor = Color.FromArgb(24, 30, 54);
+
             int height = this.Top;
             int weight = this.Left;
             WinHeight = height;
             WinWeight = weight;
-
+            PanelNavigatiom.Show();
+            panel3.Hide();
         }
 
         private void btnSaller_Click(object sender, EventArgs e)
@@ -169,7 +179,9 @@ namespace Stencil
             btnItog.BackColor = Color.FromArgb(24, 30, 54);
             btnSaller.BackColor = Color.FromArgb(46, 51, 73);
 
-
+            button1.BackColor = Color.FromArgb(24, 30, 54);
+            panel3.Hide();
+            PanelNavigatiom.Show();
         }
 
         private void btnItog_Click(object sender, EventArgs e)
@@ -188,7 +200,10 @@ namespace Stencil
             btnGAmes.BackColor = Color.FromArgb(24, 30, 54);
             btnItog.BackColor = Color.FromArgb(46, 51, 73);
             btnSaller.BackColor = Color.FromArgb(24, 30, 54);
+            button1.BackColor = Color.FromArgb(24, 30, 54);
 
+            PanelNavigatiom.Show();
+            panel3.Hide();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -229,15 +244,6 @@ namespace Stencil
             btnExit.BackColor = Color.FromArgb(24, 30, 54);
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void PanelFormLoader_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         Point lastPoint;
         private void Form1_MouseMove(object sender, MouseEventArgs e)
@@ -255,20 +261,7 @@ namespace Stencil
             lastPoint = new Point(e.X, e.Y);
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
-        {
-
-        }
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
@@ -276,6 +269,36 @@ namespace Stencil
             int weight = this.Left;
             WinHeight = height;
             WinWeight = weight;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PanelNavigatiom.Hide();
+            panel3.Show();
+            panel3.Height = button1.Height;
+            panel3.Top = button1.Top;
+
+            lblTitle.Text = "График продаж";
+            this.PanelFormLoader.Controls.Clear();
+            SellerChart Graph = new SellerChart() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            Graph.FormBorderStyle = FormBorderStyle.None;
+            this.PanelFormLoader.Controls.Add(Graph);
+            Graph.Show();
+
+            btnPanel.BackColor = Color.FromArgb(24, 30, 54);
+            btnGAmes.BackColor = Color.FromArgb(24, 30, 54);
+            btnItog.BackColor = Color.FromArgb(24, 30, 54);
+            btnSaller.BackColor = Color.FromArgb(24, 30, 54);
+            button1.BackColor = Color.FromArgb(46, 51, 73);
+
+        }
+
+       
+        
+
+        private void button1_Leave(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.FromArgb(24, 30, 54);
         }
     }
 }
