@@ -30,18 +30,10 @@ namespace Stencil
 
             
 
-        //    chart1.ChartAreas.Series["Количество проданных игр"].AxisX.LabelStyle.Fon  = new System.Drawing.Font("Trebuchet MS", 2.25F, System.Drawing.FontStyle.Bold);
+  
 
 
             conn.Open();
-            /*
-             Суть в чем
-            Я вытаскиваю количество работников, это будет для цикла фор
-            Потом по гридВию я вытаскиваю нужное количество благодарю фору Это заполнилась Х
-
-            Потом я тащу колиечство записей по имени и заношу в в строку Это заполнилась Y
-             
-             */
             SqlCommand command21 = new SqlCommand("Select count(Name_Saler) from SAler", conn);
             command21.Prepare();
             var go1 = (Int32)command21.ExecuteScalar();
@@ -56,8 +48,6 @@ namespace Stencil
             {
                 test2.Add(dr["Name_Saler"].ToString());
             }
-
-
             List<int> num5 = new List<int>();
 
            for (int i = 0; i < go1; i++)

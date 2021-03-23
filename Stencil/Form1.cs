@@ -90,14 +90,11 @@ namespace Stencil
                     break;
                     
                 case "Mmerch":
-                    btnSaller.Enabled = false;
-                    btnSaller.Text = "Недоступно";
+                    btnSaller.Visible = false;
                     button1.Visible = false;
                     break;
 
                 default:
-                    
-
                     break;
             }
             conn.Close();

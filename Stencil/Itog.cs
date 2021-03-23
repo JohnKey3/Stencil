@@ -263,5 +263,37 @@ namespace Stencil
         private void label4_Click(object sender, EventArgs e)
         {
         }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            
+            conn.Open();
+            DataTable dt1 = new DataTable();
+            listBox3.Items.Clear();
+            SqlDataAdapter da1 = new SqlDataAdapter("Select *  From SAler where Name_Saler Like '"+textBox5.Text+"%'", conn);
+
+            da1.Fill(dt1);
+            foreach (DataRow dr1 in dt1.Rows)
+            {
+                listBox3.Items.Add(dr1["Name_Saler"].ToString());
+            }
+            
+          
+            conn.Close();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            listBox2.Items.Clear();
+            conn.Open();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter("Select *  From Game_Inf where Name Like '"+textBox1.Text+"%'", conn);
+            da.Fill(dt);
+            foreach (DataRow dr in dt.Rows)
+            {
+                listBox2.Items.Add(dr["Name"].ToString());
+            }
+            conn.Close();
+        }
     }
 }

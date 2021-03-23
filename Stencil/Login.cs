@@ -68,6 +68,7 @@ namespace Stencil
                     textBox2.Text = "";
                     textBox1.Focus();
                 }
+
             }
         }
 
