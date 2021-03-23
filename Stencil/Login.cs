@@ -14,8 +14,8 @@ using Microsoft.SqlServer.Server;
 namespace Stencil
 {
     public partial class Login : Form
-    {
-        SqlConnection conn = new SqlConnection("Data Source=DESKTOP-1B8H9A7\\JIJA;Initial Catalog=8Practos;Integrated Security=True");
+    {   public static string warpd = "Data Source=DESKTOP-1B8H9A7\\JIJA;Initial Catalog=8Practos;Integrated Security=True";
+        SqlConnection conn = new SqlConnection(warpd);
         public Login()
         {
             InitializeComponent();
@@ -27,6 +27,7 @@ namespace Stencil
             this.Close();
         }
         public static string Value1 = "";
+     
         private void button1_Click(object sender, EventArgs e)
         {
             if (textBox1.Text=="" || textBox2.Text=="")

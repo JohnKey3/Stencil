@@ -19,7 +19,11 @@ namespace Stencil
    
     public partial class Form1 : Form
     {
-        SqlConnection conn = new SqlConnection("Data Source=DESKTOP-1B8H9A7\\JIJA;Initial Catalog=8Practos;Integrated Security=True");
+        Login log;
+
+        public static string constr=Login.warpd;
+           
+        SqlConnection conn = new SqlConnection(constr);
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 
@@ -33,7 +37,7 @@ namespace Stencil
                  int nHeightEllipse
 
           );
-        Login log;
+        
         
         public Form1()
         {

@@ -14,7 +14,8 @@ namespace Stencil
 {
     public partial class Seller : Form
     {
-        SqlConnection conn = new SqlConnection("Data Source=DESKTOP-1B8H9A7\\JIJA;Initial Catalog=8Practos;Integrated Security=True");
+        public static string constr = Login.warpd;
+        SqlConnection conn = new SqlConnection(constr);
         public Seller()
         {
             InitializeComponent();
