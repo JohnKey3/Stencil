@@ -49,7 +49,7 @@ namespace Stencil
                 listBox3.Items.Add(dr1["Name_Saler"].ToString());
             }
             conn.Open();
-            string query1 = "SELECT * FROM Order1 ";
+            string query1 = "SELECT Name,Name_Saler,Summa,Date FROM Itog ";
             SqlCommand command1 = new SqlCommand(query1, conn);
             SqlDataReader reader1 = command1.ExecuteReader();
             List<string[]> data1 = new List<string[]>();
@@ -120,7 +120,7 @@ namespace Stencil
             command44.Prepare();
             int Summa1 = (Int32)command44.ExecuteScalar();
 
-            SqlCommand gg = new SqlCommand("INSERT into Order1(Game_Id,Saler_Id,Summa) values(@gmid,@sid,@sum)", conn);
+            SqlCommand gg = new SqlCommand("INSERT into Order1(Game_Id,Saler_Id,Summa,Date) values(@gmid,@sid,@sum,Getdate())", conn);
             gg.Parameters.Add("@gmid", SqlDbType.Char, 100).Value = go;
             gg.Parameters.Add("@sid", SqlDbType.Char, 100).Value = go1;
             gg.Parameters.Add("@sum", SqlDbType.Char, 100).Value = Summa1;
@@ -131,7 +131,7 @@ namespace Stencil
 
 
             dataGridView2.Rows.Clear();
-            string query1 = "SELECT * FROM Order1 ";
+            string query1 = "SELECT Name,Name_Saler,Summa,Date FROM Itog ";
             SqlCommand command1 = new SqlCommand(query1, conn);
             SqlDataReader reader1 = command1.ExecuteReader();
             List<string[]> data1 = new List<string[]>();
@@ -202,7 +202,7 @@ namespace Stencil
                 listBox3.Items.Add(dr1["Name_Saler"].ToString());
             }
             conn.Open();
-            string query1 = "SELECT * FROM Order1 ";
+            string query1 = "SELECT Name,Name_Saler,Summa,Date FROM Itog ";
             SqlCommand command1 = new SqlCommand(query1, conn);
             SqlDataReader reader1 = command1.ExecuteReader();
             List<string[]> data1 = new List<string[]>();
