@@ -87,13 +87,44 @@ namespace Stencil
             }
             else
             {
+                Random rnd = new Random();
+
+                //barcode
+                DateTime date = DateTime.Now;
+
+                string stroka = "";
+
+                int frist = rnd.Next(0, 9);
+                string str = frist.ToString();
+                stroka = stroka + str;
+
+                string sstri = date.ToShortDateString();
+                for (int i = 0; i < sstri.Length; i++)
+                {
+                    if (sstri[i] == '.')
+                    {
+                        sstri = sstri.Remove(i, 1);
+                    }
+                }
+                stroka = stroka + sstri;
+             
+                for (int i = 0; i < 6; i++)
+                {
+                    int o = rnd.Next(0, 9);
+                    string hh = o.ToString();
+                    stroka = stroka + hh;
+                }
+
+
+
+
                 if (textBox4.Text == "")
                 {
                     textBox4.Text = "0";
                 }
                 conn.Open();
                 dataGridView1.Rows.Clear();
-                SqlCommand cmd5 = new SqlCommand("INSERT into Game_Inf(Name,Genre,Descr,Price,Sale) values(@Name,@Genre,@Descr,@Price,@Sale)", conn);
+                SqlCommand cmd5 = new SqlCommand("INSERT into Game_Inf(Name,Genre,Descr,Price,Sale,barcode) values(@Name,@Genre,@Descr,@Price,@Sale,@barcode)", conn);
                 SqlParameter sd1 = new SqlParameter("@Name", SqlDbType.Char, 100);
                 sd1.Value = textBox1.Text;
                 cmd5.Parameters.Add(sd1);
@@ -105,10 +136,14 @@ namespace Stencil
                 cmd5.Parameters.Add(sd3);
                 SqlParameter sd4 = new SqlParameter("@Sale", SqlDbType.Int, 100);
                 sd4.Value = textBox4.Text;
-                SqlParameter sd5 = new SqlParameter("@Genre", SqlDbType.Char, 100);
                 cmd5.Parameters.Add(sd4);
+                SqlParameter sd5 = new SqlParameter("@Genre", SqlDbType.Char, 100); 
                 sd5.Value = comboBox2.SelectedItem.ToString();
-                cmd5.Parameters.Add(sd5);           
+                cmd5.Parameters.Add(sd5);
+                SqlParameter sd6 = new SqlParameter("@barcode", SqlDbType.Char,100);
+
+                sd6.Value = stroka;
+                cmd5.Parameters.Add(sd6);
                 cmd5.Prepare();
                 cmd5.ExecuteNonQuery();
                 //   SqlCommand cmd = new SqlCommand("INSERT into Game_Inf(Name,Descr,Price,Sale) values('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "') ", conn);
