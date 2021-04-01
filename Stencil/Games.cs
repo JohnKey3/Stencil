@@ -54,7 +54,7 @@ namespace Stencil
 
             foreach (string[] s in data)
                 dataGridView1.Rows.Add(s);
-
+            //d
 
             string das = Login.Value1;
             SqlCommand cmd = new SqlCommand("Select status from users where username=@name", conn);
