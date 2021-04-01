@@ -148,7 +148,7 @@ namespace Stencil
                 cmd5.ExecuteNonQuery();
                 //   SqlCommand cmd = new SqlCommand("INSERT into Game_Inf(Name,Descr,Price,Sale) values('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "') ", conn);
 
-                //  cmd.ExecuteNonQuery();
+                //  cmd.ExecuteNonQuery()
 
 
 
