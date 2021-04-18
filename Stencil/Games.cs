@@ -87,6 +87,7 @@ namespace Stencil
             }
             else
             {
+                conn.Open();
                 Random rnd = new Random();
 
                 //barcode
@@ -94,8 +95,9 @@ namespace Stencil
 
                 string stroka = "";
 
-                int frist = rnd.Next(0, 9);
-                string str = frist.ToString();
+                SqlCommand maxcount = new SqlCommand("Select MAX(Id) from Game_Inf", conn);
+                int MxCount = Convert.ToInt32(maxcount.ExecuteScalar())+1;
+                string str = Convert.ToString(MxCount);
                 stroka = stroka + str;
 
                 string sstri = date.ToShortDateString();
@@ -122,7 +124,7 @@ namespace Stencil
                 {
                     textBox4.Text = "0";
                 }
-                conn.Open();
+                
                 dataGridView1.Rows.Clear();
                 SqlCommand cmd5 = new SqlCommand("INSERT into Game_Inf(Name,Genre,Descr,Price,Sale,barcode) values(@Name,@Genre,@Descr,@Price,@Sale,@barcode)", conn);
                 SqlParameter sd1 = new SqlParameter("@Name", SqlDbType.Char, 100);

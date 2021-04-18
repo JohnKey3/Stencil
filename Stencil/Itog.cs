@@ -29,6 +29,7 @@ namespace Stencil
         }
         private void button2_Click(object sender, EventArgs e)
         {
+            conn.Open();
             dataGridView2.Rows.Clear();
             listBox2.Items.Clear();
             listBox3.Items.Clear();
@@ -48,28 +49,31 @@ namespace Stencil
             {
                 listBox3.Items.Add(dr1["Name_Saler"].ToString());
             }
-            conn.Open();
-            string query1 = "SELECT Name,Name_Saler,Summa,Date FROM Itog ";
+
+
+
+            string query1 = "SELECT Name,Name_Saler,Summa,Vremya,Order_Id FROM Itog ";
             SqlCommand command1 = new SqlCommand(query1, conn);
             SqlDataReader reader1 = command1.ExecuteReader();
+
             List<string[]> data1 = new List<string[]>();
             while (reader1.Read())
             {
-                data1.Add(new string[4]);
+                data1.Add(new string[5]);
                 data1[data1.Count - 1][0] = reader1[0].ToString();
                 data1[data1.Count - 1][1] = reader1[1].ToString();
                 data1[data1.Count - 1][2] = reader1[2].ToString();
                 data1[data1.Count - 1][3] = reader1[3].ToString();
+                data1[data1.Count - 1][4] = reader1[4].ToString();
             }
             reader1.Close();
+
+
+
+            conn.Close();
             foreach (string[] s in data1)
                 dataGridView2.Rows.Add(s);
 
-
-           
-           
-                conn.Close();
-           
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -120,7 +124,7 @@ namespace Stencil
             command44.Prepare();
             int Summa1 = (Int32)command44.ExecuteScalar();
 
-            SqlCommand gg = new SqlCommand("INSERT into Order1(Game_Id,Saler_Id,Summa,Date) values(@gmid,@sid,@sum,Getdate())", conn);
+            SqlCommand gg = new SqlCommand("INSERT into Order1(Game_Id,Saler_Id,Summa,Vremya) values(@gmid,@sid,@sum,Getdate())", conn);
             gg.Parameters.Add("@gmid", SqlDbType.Char, 100).Value = go;
             gg.Parameters.Add("@sid", SqlDbType.Char, 100).Value = go1;
             gg.Parameters.Add("@sum", SqlDbType.Char, 100).Value = Summa1;
@@ -131,17 +135,20 @@ namespace Stencil
 
 
             dataGridView2.Rows.Clear();
-            string query1 = "SELECT Name,Name_Saler,Summa,Date FROM Itog ";
+            string query1 = "SELECT Name,Name_Saler,Summa,Vremya,Order_Id FROM Itog ";
             SqlCommand command1 = new SqlCommand(query1, conn);
             SqlDataReader reader1 = command1.ExecuteReader();
             List<string[]> data1 = new List<string[]>();
             while (reader1.Read())
             {
-                data1.Add(new string[4]);
+                data1.Add(new string[5]);
                 data1[data1.Count - 1][0] = reader1[0].ToString();
                 data1[data1.Count - 1][1] = reader1[1].ToString();
                 data1[data1.Count - 1][2] = reader1[2].ToString();
                 data1[data1.Count - 1][3] = reader1[3].ToString();
+
+                data1[data1.Count - 1][4] = reader1[4].ToString();
+
             }
 
 
@@ -202,17 +209,21 @@ namespace Stencil
                 listBox3.Items.Add(dr1["Name_Saler"].ToString());
             }
             conn.Open();
-            string query1 = "SELECT Name,Name_Saler,Summa,Date FROM Itog ";
+
+
+            string query1 = "SELECT Name,Name_Saler,Summa,Vremya,Order_Id FROM Itog ";
             SqlCommand command1 = new SqlCommand(query1, conn);
             SqlDataReader reader1 = command1.ExecuteReader();
+
             List<string[]> data1 = new List<string[]>();
             while (reader1.Read())
             {
-                data1.Add(new string[4]);
+                data1.Add(new string[5]);
                 data1[data1.Count - 1][0] = reader1[0].ToString();
                 data1[data1.Count - 1][1] = reader1[1].ToString();
                 data1[data1.Count - 1][2] = reader1[2].ToString();
                 data1[data1.Count - 1][3] = reader1[3].ToString();
+                data1[data1.Count - 1][4] = reader1[4].ToString();
             }
             reader1.Close();
 
@@ -234,9 +245,12 @@ namespace Stencil
             foreach (DataGridViewRow item in this.dataGridView2.SelectedRows)
             {
                 conn.Open();
-                int idOrder = Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[0].Value);
+
+
+
+                int idOrder = Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[4].Value);
                 SqlCommand cmd2 = new SqlCommand("Delete from Order1 where Order_Id=@idord", conn);
-                cmd2.Parameters.Add("@idord", SqlDbType.Int, 100).Value = idOrder;
+                cmd2.Parameters.Add("@idord", SqlDbType.Char, 100).Value = idOrder;
                 cmd2.Prepare();
                 cmd2.ExecuteNonQuery();
                 
@@ -256,10 +270,6 @@ namespace Stencil
             }
         }
 
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void label4_Click(object sender, EventArgs e)
         {
